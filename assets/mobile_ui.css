@@ -1,0 +1,265 @@
+/* ═══════════════════════════════════════════════════════════
+   信息采集系统 · 统一卡片式响应式UI
+   设计原则：移动优先 · 卡片化 · 简洁现代
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 设计Token ── */
+:root {
+  --primary: #1890ff;
+  --primary-dark: #096dd9;
+  --success: #52c41a;
+  --danger: #ff4d4f;
+  --warning: #faad14;
+  --bg: #f0f2f5;
+  --card-bg: #fff;
+  --text: #1f1f1f;
+  --text-secondary: #666;
+  --text-muted: #999;
+  --border: #e8e8e8;
+  --shadow: 0 1px 4px rgba(0,0,0,.06);
+  --shadow-hover: 0 4px 16px rgba(0,0,0,.12);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --space: 16px;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 14px; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif;
+  background: var(--bg); color: var(--text);
+  min-height: 100vh; overflow-x: hidden;
+}
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+
+/* ── 顶部Bar ── */
+.ui-topbar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--card-bg);
+  height: 50px; padding: 0 var(--space);
+  display: flex; align-items: center; justify-content: space-between;
+  box-shadow: var(--shadow);
+}
+.ui-topbar-left { display: flex; align-items: center; gap: 10px; }
+.ui-logo { font-size: 22px; }
+.ui-title { font-size: 16px; font-weight: 600; color: var(--text); }
+.ui-topbar-right { display: flex; align-items: center; gap: 12px; }
+.ui-topbar-right a { color: var(--danger); font-size: 13px; }
+
+/* ── 页面内容 ── */
+.ui-content {
+  padding: var(--space);
+  padding-bottom: 80px; /* 底部导航高度 */
+}
+
+/* ── 统计行 ── */
+.ui-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space);
+  margin-bottom: var(--space);
+}
+
+/* ── 卡片 ── */
+.ui-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.ui-card + .ui-card { margin-top: var(--space); }
+.ui-card-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px var(--space); border-bottom: 1px solid var(--border);
+}
+.ui-card-title { font-size: 15px; font-weight: 600; color: var(--text); }
+.ui-card-body { padding: var(--space); }
+
+/* ── 状态标签 ── */
+.ui-badge {
+  display: inline-flex; align-items: center;
+  font-size: 11px; font-weight: 500;
+  padding: 2px 8px; border-radius: 10px;
+}
+.ui-badge.on { background: #f6ffed; color: var(--success); }
+.ui-badge.off { background: #fff1f0; color: var(--danger); }
+.ui-badge.info { background: #f0f7ff; color: var(--primary); }
+.ui-badge.warn { background: #fffbe6; color: var(--warning); }
+
+/* ── 按钮 ── */
+.ui-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+  padding: 8px 14px; border-radius: var(--radius-sm);
+  font-size: 13px; border: none; cursor: pointer;
+  transition: all .2s; text-decoration: none;
+  white-space: nowrap;
+}
+.ui-btn-primary { background: var(--primary); color: #fff; }
+.ui-btn-primary:hover { background: var(--primary-dark); }
+.ui-btn-success { background: #f6ffed; color: var(--success); border: 1px solid #b7eb8f; }
+.ui-btn-success:hover { background: #d9f7be; }
+.ui-btn-danger { background: #fff1f0; color: var(--danger); border: 1px solid #ffccc7; }
+.ui-btn-danger:hover { background: #ffccc7; }
+.ui-btn-default { background: #fff; color: var(--text); border: 1px solid var(--border); }
+.ui-btn-default:hover { border-color: var(--primary); color: var(--primary); }
+.ui-btn-block { display: flex; width: 100%; padding: 12px; font-size: 15px; border-radius: var(--radius); }
+
+/* ── 操作工具栏 ── */
+.ui-toolbar {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  padding: 12px var(--space);
+  border-top: 1px solid var(--border);
+  background: #fafafa;
+}
+
+/* ── 信息行 ── */
+.ui-info-list { }
+.ui-info-row {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding: 8px 0; font-size: 13px;
+  border-bottom: 1px solid #f5f5f5;
+}
+.ui-info-row:last-child { border-bottom: none; }
+.ui-info-label { color: var(--text-muted); flex-shrink: 0; margin-right: 12px; }
+.ui-info-value { color: var(--text); text-align: right; word-break: break-all; }
+
+/* ── 表单卡片（表单列表页） ── */
+.form-card { }
+.form-card-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding: 14px var(--space); border-bottom: 1px solid var(--border);
+}
+.form-card-name { font-size: 15px; font-weight: 600; color: var(--text); flex: 1; }
+.form-card-actions {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  padding: 12px var(--space);
+}
+
+/* ── 记录卡片（数据列表页） ── */
+.record-card { }
+.record-card-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px var(--space); border-bottom: 1px solid var(--border);
+  background: #fafafa;
+}
+.record-card-title { font-size: 14px; font-weight: 600; color: var(--text); }
+.record-card-meta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.record-card-body { padding: 12px var(--space); }
+.record-card-actions {
+  display: flex; gap: 8px; padding: 10px var(--space);
+  border-top: 1px solid var(--border); background: #fafafa;
+}
+.record-edit-code {
+  font-family: 'Courier New', monospace;
+  font-size: 15px; font-weight: 700; color: var(--danger);
+}
+
+/* ── 表格替代：卡片列表 ── */
+.data-list { }
+.data-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px var(--space); border-bottom: 1px solid var(--border);
+  background: var(--card-bg);
+  cursor: pointer; transition: background .15s;
+}
+.data-row:hover { background: #f0f7ff; }
+.data-row:last-child { border-bottom: none; }
+.data-row-left { flex: 1; min-width: 0; }
+.data-row-name { font-size: 14px; font-weight: 600; color: var(--text); }
+.data-row-sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.data-row-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; margin-left: 12px; }
+.data-row-code { font-size: 14px; font-weight: 700; color: var(--danger); font-family: monospace; }
+.data-row-time { font-size: 11px; color: var(--text-muted); }
+
+/* ── 底部Tab导航 ── */
+.ui-bottom-nav {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+  background: var(--card-bg);
+  display: flex; box-shadow: 0 -2px 8px rgba(0,0,0,.08);
+  border-top: 1px solid var(--border);
+}
+.ui-nav-tab {
+  flex: 1; text-align: center; padding: 8px 0;
+  color: var(--text-muted); text-decoration: none; display: block;
+  transition: color .2s; position: relative;
+}
+.ui-nav-tab.active { color: var(--primary); }
+.ui-nav-tab-icon { display: block; font-size: 20px; margin-bottom: 2px; }
+.ui-nav-tab-label { font-size: 11px; }
+
+/* ── 空状态 ── */
+.ui-empty {
+  text-align: center; padding: 48px 24px;
+}
+.ui-empty-icon { font-size: 48px; opacity: .35; }
+.ui-empty-title { font-size: 15px; font-weight: 500; color: var(--text-secondary); margin-top: 12px; }
+.ui-empty-hint { font-size: 13px; color: var(--text-muted); margin-top: 6px; }
+
+/* ── 警告提示 ── */
+.ui-alert { padding: 12px var(--space); border-radius: var(--radius-sm); font-size: 13px; margin-bottom: var(--space); }
+.ui-alert-success { background: #f6ffed; border: 1px solid #b7eb8f; color: #52c41a; }
+.ui-alert-error { background: #fff1f0; border: 1px solid #ffccc7; color: var(--danger); }
+.ui-alert-info { background: #f0f7ff; border: 1px solid #91d5ff; color: var(--primary); }
+
+/* ── 输入框 ── */
+.ui-input {
+  width: 100%; padding: 10px 12px;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  font-size: 14px; font-family: inherit;
+  transition: border-color .2s;
+  -webkit-appearance: none;
+}
+.ui-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 2px rgba(24,144,255,.15); }
+.ui-label { display: block; font-size: 13px; font-weight: 500; color: var(--text-secondary); margin-bottom: 6px; }
+.ui-form-group { margin-bottom: var(--space); }
+
+/* ── 确认删除对话框 ── */
+.ui-confirm-box {
+  text-align: center; padding: 32px 24px;
+}
+.ui-confirm-title { font-size: 16px; font-weight: 600; color: var(--danger); margin: 16px 0 8px; }
+.ui-confirm-desc { font-size: 13px; color: var(--text-secondary); margin-bottom: 24px; }
+.ui-confirm-btns { display: flex; gap: 12px; }
+
+/* ── 分页 ── */
+.ui-pagination { display: flex; justify-content: center; gap: 8px; margin-top: var(--space); }
+.ui-pagination a, .ui-pagination span {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 36px; height: 36px; padding: 0 10px;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  font-size: 13px; color: var(--text);
+}
+.ui-pagination a:hover { border-color: var(--primary); color: var(--primary); }
+.ui-pagination .active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+/* ═══════════════════════════════════════════════════════════
+   PC端适配（>768px）
+   ═══════════════════════════════════════════════════════════ */
+@media (min-width: 769px) {
+  .ui-content { padding-bottom: 24px; max-width: 900px; margin: 0 auto; }
+
+  .ui-stats { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+
+  .ui-bottom-nav { display: none; }
+
+  .ui-card { box-shadow: var(--shadow); }
+
+  /* PC端：数据列表改为网格 */
+  .data-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--space); }
+  .data-list > .data-row { border-radius: var(--radius); border-bottom: none; margin-bottom: 0; }
+  .data-list > .data-row:hover { box-shadow: var(--shadow-hover); transform: translateY(-1px); }
+
+  /* PC端：表单卡片列表 */
+  .form-card { border-radius: var(--radius); margin-bottom: 0; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   深色滚动条 & 选中文字
+   ═══════════════════════════════════════════════════════════ */
+::selection { background: rgba(24,144,255,.2); }
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d9d9d9; border-radius: 2px; }

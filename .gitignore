@@ -1,0 +1,28 @@
+# 操作系统
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+*.sublime-*
+.idea/
+
+# 数据文件（不同步）
+db/*.db
+db/*.db-journal
+data/
+data_source/*.json
+*.log
+
+# PHP 缓存
+*.tmp
+*.cache
+
+# 压缩包
+*.zip
+*.tar
+*.tar.gz
+
+# 环境配置（包含敏感信息）
+.env
+config.local.php
