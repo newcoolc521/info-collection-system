@@ -202,9 +202,12 @@ if ($userInfo) {
   <div style="text-align:center;margin-top:12px;font-size:13px;color:#999">如有疑问，请联系学校或筛查机构确认。</div>
 </div>
 <?php else: ?>
-<?php foreach ($printReports as $pr): ?>
+<?php
+$pr = $printReports[0] ?? null;
+if ($pr):
+?>
 <div class="report-card">
-  <div class="report-date">📅 <?= htmlspecialchars(substr($pr['PrintDate'] ?? '', 0, 10)) ?></div>
+  <div class="report-date">📅 <?= htmlspecialchars(substr($pr['PrintDate'] ?? '', 0, 16)) ?></div>
 
   <?php
     $suggested = $pr['SuggestedContent'] ?? '';
@@ -218,7 +221,7 @@ if ($userInfo) {
   <div class="evaluation-text"><?= htmlspecialchars($pr['ResultEvaluation']) ?></div>
   <?php endif; ?>
 </div>
-<?php endforeach; ?>
+<?php endif; ?>
 <?php endif; ?>
 
 <div style="text-align:center;padding:12px 0;font-size:12px;color:#bfbfbf">

@@ -669,9 +669,9 @@ function get_spine_results_by_idcard(string $idCard, string $dbFolderPath): arra
     $userRow = $resultU->fetchArray(SQLITE3_ASSOC);
     if ($userRow) $userInfo = $userRow;
 
-    // 查询 PrintReport（只查未删除的）
+    // 查询 PrintReport（只查未删除的，按日期时间倒序只取最新一条）
     $printReports = [];
-    $stmt = $db->prepare('SELECT * FROM PrintReport WHERE UserId = :uid AND IsDel = 0 ORDER BY PrintDate DESC');
+    $stmt = $db->prepare('SELECT * FROM PrintReport WHERE UserId = :uid AND IsDel = 0 ORDER BY PrintDate DESC LIMIT 1');
     $stmt->bindValue(':uid', $idCard);
     $result = $stmt->execute();
     while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
