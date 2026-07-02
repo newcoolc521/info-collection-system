@@ -17,7 +17,7 @@ if (empty($subs)) {
     die('<script>alert("无数据可导出");history.back();</script>');
 }
 
-$field_display_names = ['身份证号' => '学籍号'];
+$field_display_names = ['身份证号' => '身份证号'];
 $headers = array_map(function($k) use ($field_display_names) {
     return $field_display_names[$k] ?? $k;
 }, $field_keys);
@@ -294,8 +294,8 @@ function build_xlsx($headers, $rows, $sheetName) {
     $maxCol = $colLetters[$colCount - 1];
     $lastRow = count($sheetData);
 
-    // 确定"学籍号"列的索引（用于应用文本格式样式 s="8"）
-    $xuejihao_idx = array_search('学籍号', $headers);
+    // 确定"身份证号"列的索引（用于应用文本格式样式 s="8"）
+    $idcard_idx = array_search('身份证号', $headers);
     $text_style = ' s="8"'; // numFmtId=49 (@文本格式)
 
     $sheetXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' . "\n";
@@ -319,8 +319,8 @@ function build_xlsx($headers, $rows, $sheetName) {
         foreach ($row as $ci => $cell) {
             $cRef = $colLetters[$ci] . $rIdx;
             $strIdx = $stringTable[strval($cell)] ?? 0;
-            // 学籍号列使用文本格式样式（s="8"），其余标题行使用 s="4"
-            if ($ci === $xuejihao_idx) {
+            // 身份证号列使用文本格式样式（s="8"），其余标题行使用 s="4"
+            if ($ci === $idcard_idx) {
                 $style = ' s="8"';
             } elseif ($rIdx == 1) {
                 $style = ' s="4"';
